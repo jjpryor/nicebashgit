@@ -37,11 +37,7 @@ exit
 Then log back in:
 ```shell
 yum i<TAB>
-<<<<<<< HEAD
 git c<TAB>
-=======
-git <TAB>
->>>>>>> 870bc7d8faf67624e99bf057ccb98fb681d15aea
 cd $HOME
 git clone https://github.com/jjpryor/nicebashgit.git
 cd nicebashgit

@@ -49,5 +49,6 @@ cp $(rpm -ql git | grep git-prompt | head -n 1) ~/.git-prompt.sh
 exit
 ```
 
-Then log back in:
+Then log back in, and the your bash shell prompt should be much more useful:
 
+![Image of Shell](https://github.com/jjpryor/nicebashgit/raw/master/nicebashgit.png)

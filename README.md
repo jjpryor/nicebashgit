@@ -45,7 +45,7 @@ cd $HOME
 git clone https://github.com/jjpryor/nicebashgit.git
 cd nicebashgit
 cat append-me-to-dot-bashrc >> ~/.bashrc
-cp $(rpm -ql git | grep git-prompt | head -n 1) ~/
+cp $(rpm -ql git | grep git-prompt | head -n 1) ~/.git-prompt.sh
 exit
 ```
 

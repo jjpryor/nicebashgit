@@ -12,7 +12,7 @@ for checking puppet code syntax and styling.
 ## Credits
 + http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
 
-## Installation
+## RPM Installation
 Run the following in a shell as root.
 ```bash
 yum install bash-completion git
@@ -28,6 +28,9 @@ cp -i dot-gitignore ~/.gitignore
 vi ~/.gitconfig`
 ```
 In `~/.gitconfig`, uncomment the two lines and fill in your name & email.
+
+
+## Test the <TAB> completion and enable BASH PS1 prompt
 
 Then logout.
 ```shell

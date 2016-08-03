@@ -4,6 +4,10 @@ setup a nice bash prompt `PS1` variable that is git branch/status enabled,
 will turn on Bash tab-completion for git sub-commands, and will add two aliases
 for checking puppet code syntax and styling.
 
+![Image of Shell](https://github.com/jjpryor/nicebashgit/raw/master/nicebashgit.png)
+
+In the screenshot above, we can see a coloried and git-aware Bash `PS1` prompt, `<TAB>` completion for git, and color-highlighting in the git output.
+
 ## Known Dependencies
 + Red Hat family OS
 + `rpm` command
@@ -49,6 +53,5 @@ cp $(rpm -ql git | grep git-prompt | head -n 1) ~/.git-prompt.sh
 exit
 ```
 
-Then log back in, and the your bash shell prompt should be much more useful:
+Then log back in, and the your bash shell prompt should be much more useful.
 
-![Image of Shell](https://github.com/jjpryor/nicebashgit/raw/master/nicebashgit.png)

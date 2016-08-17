@@ -15,6 +15,7 @@ In the screenshot above, we can see a coloried and git-aware Bash `PS1` prompt, 
 
 ## Credits
 + http://mediadoneright.com/content/ultimate-git-ps1-bash-prompt
++ https://coderwall.com/p/euwpig/a-better-git-log
 
 ## RPM Installation
 Run the following in a shell as root.

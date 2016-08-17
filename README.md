@@ -4,6 +4,10 @@ setup a nice bash prompt `PS1` variable that is git branch/status enabled,
 will turn on Bash tab-completion for git sub-commands, and will add two aliases
 for checking puppet code syntax and styling.
 
+![Image of Shell](https://github.com/jjpryor/nicebashgit/raw/master/nicebashgit.png)
+
+In the screenshot above, we can see a coloried and git-aware Bash `PS1` prompt, `<TAB>` completion for git, and color-highlighting in the git output.
+
 ## Known Dependencies
 + Red Hat family OS
 + `rpm` command
@@ -23,8 +27,12 @@ Then as normal user:
 ```bash
 git clone https://github.com/jjpryor/nicebashgit.git
 cd nicebashgit
-cp -i dot-gitconfig ~/.gitconfig
-cp -i dot-gitignore ~/.gitignore
+# backup your existing .gitconfig and .gitignore files
+cp -p ~/.gitconfig ~/.gitconfig-BAK
+cp -p ~/.gitignore ~/.gitignore-BAK
+# Now put these in place
+cp dot-gitconfig ~/.gitconfig
+cp dot-gitignore ~/.gitignore
 vi ~/.gitconfig`
 ```
 In `~/.gitconfig`, uncomment the two lines and fill in your name & email.
@@ -49,5 +57,11 @@ cp $(rpm -ql git | grep git-prompt | head -n 1) ~/.git-prompt.sh
 exit
 ```
 
-Then log back in:
+Then log back in, and the your bash shell prompt should be much more useful.
 
+## Uninstall
+```shell
+mv ~/.gitconfig-BAK ~/.gitconfig
+mv ~/.gitignore-BAK ~/.gitignore
+rm .git-prompt.sh
+```

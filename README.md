@@ -34,7 +34,7 @@ cp -p ~/.gitignore ~/.gitignore-BAK
 # Now put these in place
 cp dot-gitconfig ~/.gitconfig
 cp dot-gitignore ~/.gitignore
-vi ~/.gitconfig`
+vi ~/.gitconfig
 ```
 In `~/.gitconfig`, uncomment the two lines and fill in your name & email.
 

@@ -10,6 +10,7 @@ In the screenshot above, we can see a coloried and git-aware Bash `PS1` prompt, 
 
 ## Known Dependencies
 + Red Hat family OS
+  - Tested on Fedora 25 and RHEL7.3
 + `rpm` command
 + `git` command
 
@@ -50,11 +51,15 @@ Then log back in:
 ```shell
 yum i<TAB>
 git c<TAB>
-cd $HOME
+```
+
+## Find the git-prompt.sh and copy it to ~/ and then logout
+```shell
+cd ~
 git clone https://github.com/jjpryor/nicebashgit.git
 cd nicebashgit
 cat append-me-to-dot-bashrc >> ~/.bashrc
-cp $(rpm -ql git | grep git-prompt | head -n 1) ~/.git-prompt.sh
+cp $(rpm -ql git git-core | grep git-prompt | head -n 1) ~/.git-prompt.sh
 exit
 ```
 

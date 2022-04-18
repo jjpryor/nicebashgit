@@ -29,3 +29,4 @@
 	st = status
         se = !git rev-list --all | xargs git grep -F
         undo = reset HEAD~1 --mixed
+	unstage = reset HEAD --

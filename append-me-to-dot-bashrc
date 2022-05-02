@@ -15,7 +15,7 @@ alias ppv='puppet parser validate'
 alias ppl='puppet-lint'
 
 function __prompt_command() {
-  local the_exit_code=${PIPESTATUS[-1]}
+  local the_exit_code=${PIPESTATUS[-1]} # This needs to be first in the function
   # Source global definitions
   if [ -f /etc/bashrc ]; then
     . /etc/bashrc

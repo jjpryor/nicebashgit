@@ -1,4 +1,5 @@
-export PROMPT_COMMAND=__prompt_command      # MUST BE FIRST LINE - Func to gen PS1 after CMDs
+# .bashrc
+export PROMPT_COMMAND=__prompt_command      # Func to gen PS1 after CMDs
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
@@ -15,7 +16,7 @@ alias ppv='puppet parser validate'
 alias ppl='puppet-lint'
 
 function __prompt_command() {
-  local the_exit_code=${PIPESTATUS[-1]} # This needs to be first in the function
+  local the_exit_code=${PIPESTATUS[-1]}
   # Source global definitions
   if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -112,7 +113,7 @@ function __prompt_command() {
   # Various variables you might want for your PS1 prompt instead
   Time12h="\T"
   Time12a="\@"
-  PathShort="\w"
+  PathShort=" \w"
   PathFull="\W"
   NewLine="\n"
   Jobs="\j"
@@ -137,9 +138,38 @@ function __prompt_command() {
   else
     the_exit_code_colored="$BGreen${the_exit_code}$Color_Off"
   fi
+  local trunc_symbol="\[$(tput setaf 1)$(tput bold)\]..."
+  
+  if [[ -z "$VIRTUAL_ENV" ]]; then
+    unset virt_env
+  else
+#     local virt_env=`printf "($(echo $VIRTUAL_ENV | awk -F "/" '{print $(NF-1)"/"$NF}')) "`;
+    local virt_env=`printf "($(echo $VIRTUAL_ENV | awk -F "/" '{print $NF}')) "`;
+  fi
+#   if [ -f /usr/bin/python3 ] ; then
+#     local ppython_version=$(python3 --version 2>&1 | command awk '{print "py-"$2;}')
+#     local ppython_version_colored="$White$ppython_version$Color_Off"
+#   else
+#     local ppython_version_colored=""
+#   fi
+  
+  git branch &>/dev/null
+  if [ $? -eq 0 ]; then
+    echo `git status` | grep -i 'Changes not staged for commit\|Changes to be committed'  > /dev/null 2>&1
+    if [ "$?" -eq "0" ]; then
+      local last_commit_hash=$(git log --abbrev-commit --date=relative -n 1 | head -n 1 | awk '{print $2'})
+      local last_commit_time=$(git log --date=relative -n 1 | grep '^Date:' | sed -e 's/Date\:\s\s\s//')
+      echo "${last_commit_time}" | grep -i hour > /dev/null 2>&1
+      if [ "$?" -eq "0" ] ; then
+        unset last_commit_time
+        unset last_commit_hash
+      else
+        local last_commit_time_colored="${IYellow}${last_commit_hash} ${last_commit_time}${Color_Off} "
+      fi
+    fi
+  fi
 
-
-  export PS1=$IBlack$Time12h$Color_Off$UserAtHostColors'$(git branch &>/dev/null;\
+  export PS1=$IBlack$Time12h$Color_Off' '$On_Black$White$virt_env$Color_Off$On_Black$ppython_version_colored$UserAtHostColors$BCyan$PathShort$Color_Off'$(git branch &>/dev/null;\
   if [ $? -eq 0 ]; then \
     echo "$(echo `git status` | grep "nothing to commit" > /dev/null 2>&1; \
     if [ "$?" -eq "0" ]; then \
@@ -148,9 +178,9 @@ function __prompt_command() {
     else \
       # @5 - Changes to working tree
       echo "'$IRed'"$(__git_ps1 " {%s}"); \
-    fi) '$BCyan$PathShort$Color_Off' '$the_exit_code_colored' '$BGreen\\n\$' '$Color_Off'"; \
+    fi) '$last_commit_time_colored$the_exit_code_colored\\n$BGreen\$' '$Color_Off'"; \
   else \
     # @2 - Prompt when not in GIT repo
-    echo " '$BIBlue$PathShort$Color_Off' '$the_exit_code_colored' '$BGreen\\n\$' '$Color_Off'"; \
+    echo " '$the_exit_code_colored\\n$BGreen\$' '$Color_Off'"; \
   fi)'
 }
